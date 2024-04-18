@@ -4,11 +4,8 @@ import {faker} from '@faker-js/faker';
 let bookData = {
   title: Cypress._.capitalize(faker.lorem.words(3)), // Генерация случайного заголовка
   description: faker.lorem.paragraph(2), // Генерация случайного описания
-  author:Cypress._.capitalize(faker.random.words(2)) //Генерация случайного имени автора
-  //author:faker.person.name(), не прошло
-  //author: faker.Name.findName(), // не прошло
-  //https://github.com/fzaninotto/Faker#formatters
-  //https://fakerjs.dev/guide/usage.html
+  author:Cypress._.capitalize(faker.person.firstName("male")) //Генерация случайного имени автора
+    
 } 
  
 beforeEach(() => {
@@ -27,7 +24,7 @@ it("Should successfully add random book to favorite", () => {
 });
 
 it("Should successfully deleted random book from favorite", () => {
-  cy.addBookToFavorite(bookData);
+  cy.deleteBookFromFavorite(bookData);
   cy.contains('Delete from favorite').should('be.visible');
 });
   
